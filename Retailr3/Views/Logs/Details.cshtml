@@ -1,0 +1,80 @@
+﻿@model Retailr3.Models.LogModels.LogDetailsViewModel
+
+
+@{
+    ViewData["Title"] = "Log Details";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                @*<h4 class="card-title">Edit Profile</h4>*@
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Id)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.Id)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Message)</label>
+                            <textarea readonly asp-for="Message" class="form-control" rows="5"></textarea>
+                            @*<label class="form-control border-input">@Html.DisplayFor(model => model.Message)</label>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.MessageTemplate)</label>
+                            <textarea readonly asp-for="MessageTemplate" class="form-control" rows="5"></textarea>
+                            @*<label class="form-control border-input">@Html.DisplayFor(model => model.MessageTemplate)</label>*@
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Exception)</label>
+                            <textarea readonly asp-for="Exception" class="form-control" rows="10"></textarea>
+                            @*<label class="form-control border-input">@Html.DisplayFor(model => model.RegionDescription)</label>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.TimeStamp)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.TimeStamp)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Level)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.Level)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.LogEvent)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.LogEvent)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <a class="btn btn-success btn-sm" asp-action="Index">Back To Logs</a>
+    </div>
+</div>
+

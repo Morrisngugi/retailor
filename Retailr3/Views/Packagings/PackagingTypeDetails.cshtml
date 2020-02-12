@@ -1,0 +1,66 @@
+﻿@model Retailr3.Models.PackagingType.PackagingTypeDetailsViewModel
+
+@{
+    ViewData["Title"] = "PackagingTypeDetails";
+}
+
+<h2>PackagingTypeDetails</h2>
+
+<div>
+    <h4>PackagingTypeDetailsViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PackagingId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PackagingId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PackagingName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PackagingName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateLastUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateLastUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

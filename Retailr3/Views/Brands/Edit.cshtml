@@ -1,0 +1,55 @@
+﻿@model Retailr3.Models.Brand.EditBrandViewModel
+
+@{
+    ViewData["Title"] = "Edit Brand Details";
+}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-content">
+                    <form id="editRegion" asp-action="Edit">
+                        @Html.ValidationSummary(true)
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="Id" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                     <input asp-for="Description" class="form-control" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <button id="submit_btn" type="submit" class="btn btn-info btn-fill btn-wd pull-right">Update</button>
+                          </div> 
+                          <div class="col-md-6">
+                               <button id="submit_btn" asp-action="Index" class="btn btn-warning btn-fill btn-wd ">Back to Brands</button>
+                          </div> 
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

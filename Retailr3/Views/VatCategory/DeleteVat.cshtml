@@ -1,0 +1,68 @@
+﻿@model Retailr3.Models.Vat.VatDetailsViewModel
+
+@{
+    ViewData["Title"] = "DeleteVat";
+}
+
+<h2>DeleteVat</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VatDetailsViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VatCategoryId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VatCategoryId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VatCategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VatCategoryName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateLastUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateLastUpdated)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteVat">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

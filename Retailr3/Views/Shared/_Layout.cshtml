@@ -1,0 +1,1685 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@using Retailr3.Helpers;
+@using Retailr3.Utilities;
+@using Microsoft.AspNetCore.Mvc.ViewFeatures;
+@using Microsoft.AspNetCore.Mvc.Razor;
+@using Microsoft.AspNetCore.Mvc.RazorPages;
+@using Microsoft.AspNetCore.Mvc.TagHelpers;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retailr - @ViewData["Title"]</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">*@
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="~/css/paper-dashboard.css" rel="stylesheet" />
+
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <link href="~/css/themify-icons.css" rel="stylesheet">
+
+    <link href="~/assets/Datatables/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="~/assets/Datatables/rowReorder.dataTables.min.css" rel="stylesheet">
+
+    <link href="~/assets/css/multiple-select.css" rel="stylesheet">
+    <link href="~/assets/css/jquery-ui.min.css" rel="stylesheet">
+
+
+    <script src="~/js/core.js"></script>
+    <script src="~/js/sweetalert2@8.js"></script>
+    <!-- <link rel="stylesheet" href="~/css/site.css" /> -->
+    @*toastr scripts*@
+    <link rel="stylesheet" href="~/css/toastr.min.css" />
+    <script src="~/js/toastr.min.js"></script>
+
+    @*buttons*@
+    <link rel="stylesheet" href="~/css/buttons.dataTables.min.css" />
+
+    @*td buttons alignment*@
+    <link rel="stylesheet" href="~/css/buttonsAlignment.css" />
+
+
+
+
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body oncontextmenu="return false;" id="bdy">
+    <div class="wrapper">
+
+        <!-- =====================side nav=================== -->
+        <div class="sidebar" @*data-background-color="white" data-active-color="success"*@>
+            <div class="logo">
+                <a href="/Home/Index" class="simple-text logo-mini">
+
+                    R
+
+                </a>
+
+                <a href="/Home/Index" class="simple-text logo-normal">
+                    Retailr
+
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+
+
+                <ul class="nav">
+
+                    @*@if (User.IsInRole("Merchant"))
+        {*@
+                    <li class='@Html.IsActive("Home", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="ti-panel"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class='@Html.IsActive("Tiers", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Tiers" asp-action="Index">
+                            <i class="ti-server"></i>
+                            <p>
+                                Tiers
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("UnitOfMeasureType", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="UnitOfMeasureType" asp-action="Index">
+                            <i class="ti-layout-grid2"></i>
+                            <p>
+                                Unit Of Measure Types
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("Brands", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Brands" asp-action="Index">
+                            <i class="ti-layout-cta-center"></i>
+                            <p>
+                                Brands
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("Packagings", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Packagings" asp-action="Index">
+                            <i class="ti-gift"></i>
+                            <p>
+                                Packagings
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("VatCategory", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="VatCategory" asp-action="Index">
+                            <i class="ti-layout-cta-center"></i>
+                            <p>
+                                Vat Categories
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("Categories", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">
+                            <i class="ti-layout-column3"></i>
+                            <p>
+                                Categories
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class='@Html.IsActive("Countries", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Countries" asp-action="Index">
+                            <i class="ti-layout-grid2-thumb"></i>
+                            <p>
+                                Countries
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class='@Html.IsActive("EntityTypes", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="EntityTypes" asp-action="Index">
+                            <i class="ti-map"></i>
+                            <p>
+                                Entity Types
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class='@Html.IsActive("Anchors", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Anchors" asp-action="Index">
+                            <i class="ti-layers-alt"></i>
+                            <p>
+                                Anchors
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class='@Html.IsActive("Catalogs", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Catalogs" asp-action="Index">
+                            <i class="ti-package"></i>
+                            <p>
+                                Catalogs
+                            </p>
+                        </a>
+                    </li>
+                    <li class='@Html.IsActive("Pricing", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Pricing" asp-action="Index">
+                            <i class="ti-package"></i>
+                            <p>
+                                Pricings
+                            </p>
+                        </a>
+                    </li>
+
+
+
+
+                    <li class='@Html.IsActive("Logs", "Index")'>
+                        <a class="nav-link" asp-area="" asp-controller="Logs" asp-action="Index">
+
+                            <i class="ti-control-shuffle"></i>
+                            <p>
+                                Logs
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+        <!-- =====================side nav=================== -->
+
+        <div class="main-panel">
+            <!-- =============================top nav================= -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar bar1"></span>
+                            <span class="icon-bar bar2"></span>
+                            <span class="icon-bar bar3"></span>
+                        </button>
+                        <a class="navbar-brand" href="#Dashboard">
+                            @ViewData["Title"]
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <form class="navbar-form navbar-right" asp-controller="Account" asp-action="LogoutAsync" asp-route-returnUrl="@Url.Action("Index","Home",new {area = ""})" method="post" id="logoutForm">
+                            <div class="input-group">
+                                <button style="border: 1px solid #104bbf;" type="submit" title="click to logout" class="form-control btn-danger logout_btn"><i class="fa fa-power-off"></i> Logout</button>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#"
+                                   title="loggedin entity"
+                                   style="color:black;">
+                                    Hello
+                                    @*@User.Claims.First(claim => claim.Type == "preferred_username").Value*@
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- =============================top nav================= -->
+            <!-- =====================container========================= -->
+            <div class="content">
+                <div class="container-fluid">
+
+                    <partial name="_CookieConsentPartial" />
+                    <partial name="_NotificationPanel" />
+
+                    @RenderBody()
+
+                </div>
+            </div>
+            <!-- =====================container========================= -->
+            <!-- ==============================footer=========================== -->
+
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy;
+                    <script>document.write(new Date().getFullYear())</script> - Notifyr  - powered by @*<a href="www.virtualcity.co.ke" target="_blank">*@Virtualcity@*</a>*@
+                </div>
+            </footer>
+            <!-- ==============================footer=========================== -->
+        </div>
+
+    </div>
+
+    <script language="JavaScript">
+        /**
+          * Disable right-click of mouse, F12 key, and save key combinations on page
+
+          */
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    disabledEvent(e);
+                }
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    disabledEvent(e);
+                }
+                // "F12" key
+                if (event.keyCode == 123) {
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+    </script>
+
+
+    <!-- <script src="~/js/site.js" asp-append-version="true"></script> -->
+    <!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+
+
+    <script src="~/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+    <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!--  Forms Validations Plugin -->
+    <script src="~/js/jquery.validate.min.js"></script>
+
+    <!-- Promise Library for SweetAlert2 working on IE -->
+    <script src="~/js/es6-promise-auto.min.js"></script>
+
+    <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+    <script src="~/js/moment.min.js"></script>
+
+    <!--  Date Time Picker Plugin is included in this js file -->
+    <script src="~/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/assets//js/jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+    <!--  Select Picker Plugin -->
+    <script src="~/js/bootstrap-selectpicker.js"></script>
+
+    <!--  Switch and Tags Input Plugins -->
+    <script src="~/js/bootstrap-switch-tags.js"></script>
+
+    <!-- Circle Percentage-chart -->
+    <script src="~/js/jquery.easypiechart.min.js"></script>
+
+    <!--  Charts Plugin -->
+    <script src="~/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="~/js/bootstrap-notify.js"></script>
+
+    <!-- Sweet Alert 2 plugin -->
+    <script src="~/js/sweetalert2.js"></script>
+
+    <!-- Vector Map plugin -->
+    <script src="~/js/jquery-jvectormap.js"></script>
+
+    <!-- Wizard Plugin    -->
+    <script src="~/js/jquery.bootstrap.wizard.min.js"></script>
+
+    <!--  Bootstrap Table Plugin    -->
+    <script src="~/js/bootstrap-table.js"></script>
+
+    <!--  Plugin for DataTables.net  -->
+    <script src="~/js/jquery.datatables.js"></script>
+
+    <!--  Plugin for DataTables.net  -->
+    @*<script src="~/assets/Datatables/jquery.dataTables.min.js"></script>*@
+
+    <script src="~/assets/Datatables/dataTables.rowReorder.min.js"></script>
+
+    <!--  Plugin for DataTables.net  -->
+    <script src="~/assets/Datatables/dataTables.responsive.min.js"></script>
+
+    <!--  Full Calendar Plugin    -->
+    <script src="~/js/fullcalendar.min.js"></script>
+
+    <!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+    <script src="~/js/main.js"></script>
+
+    <!--   Sharrre Library    -->
+    <script src="~/js/jquery.sharrre.js"></script>
+    <script src="~/assets/js/multiple-select.js"></script>
+
+    @*buttons*@
+    <script src="~/js/buttons.html5.min.js"></script>
+    <script src="~/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/pdfmake.min.js"></script>
+    <script src="~/js/vfs_fonts.js"></script>
+    <script src="~/js/jszip.min.js"></script>
+    <script src="~/js/buttons.print.min.js"></script>
+
+    @*<script src="~/js/umd/canvasjs.min.js"></script>
+        <script src="~/js/umd/highcharts.js"></script>
+        <script src="~/js/umd/exporting.js"></script>
+        <script src="~/js/umd/export-data.js"></script>*@
+
+
+
+    <!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
+    @*<script src="~/js/demo.js"></script>*@
+
+
+    <script>
+        $(document).ready(function () {
+            var factoryname = 'KTDA';
+            var filename = factoryname + "_" + "_report";
+
+            var table1 = $('#example').DataTable({
+                "bProcessing": true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA REPORTING"
+                            });
+                        }
+                    },
+                    'excelHtml5',
+                    {
+                        extend: 'print',
+                        title: "KTDA REPORTING",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            //======================================================================regions==========================================================
+            var table2 = $('#regionsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA REGIONS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA REGIONS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA REGIONS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================factories==========================================================
+            var table3 = $('#factoriesdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA FACTORIES REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA FACTORIES REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA FACTORIES REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================groups==========================================================
+            var table4 = $('#groupsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA GROUPS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA GROUPS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA GROUPS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+
+            //======================================================================settings==========================================================
+            var table5 = $('#settingsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA SETTINGS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA SETTINGS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA SETTINGS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //groupcontactsdatatables
+            //======================================================================groupcontactsdatatables==========================================================
+            var table6 = $('#groupcontactsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA GROUP CONTACTS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA GROUP CONTACTS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA GROUP CONTACTS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+
+            //======================================================================contactsdatatables==========================================================
+            var table7 = $('#contactsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA CONTACTS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA CONTACTS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA CONTACTS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================smsdatatables==========================================================
+            var table8 = $('#smsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA SMS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA SMS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA SMS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================smsdatatables==========================================================
+            var table9 = $('#logsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA LOGS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "KTDA LOGS REPORT"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "KTDA LOGS REPORT",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================tiersdatatables==========================================================
+            var table10 = $('#pricingdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Pricing"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Pricing"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Pricing",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table10 = $('#tiersdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Tiers"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Tiers"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Tiers",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table11 = $('#categoriesdatatables').DataTable({
+                "bProcessing": true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Categories"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Categories"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Categories",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table12 = $('#UOMTsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "UnitOfMeasures"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "UnitOfMeasures"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "UnitOfMeasures",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table13 = $('#brandsdatatables').DataTable({
+                "bProcessing": true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Brands"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Brands"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Brands",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table14 = $('#packagingsdatatable').DataTable({
+                "bProcessing": true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Packagings"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Packagings"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Packagings",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+            var table15 = $('#vatCategorydatatable').DataTable({
+                "bProcessing": true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Vat Categories"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Vat Categories"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Vat Categories",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================regiondatatables==========================================================
+            var table16 = $('#regiondatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Regions"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Regions"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Regions",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            //======================================================================smsdatatables==========================================================
+            var table17 = $('#UOMsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Unit Of Measures"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Unit Of Measures"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Unit Of Measures",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+
+            var table18 = $('#anchorsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Anchors"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Anchors"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Anchors",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+            });
+
+            
+             var table19 = $('#entityTypesdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Entity Types"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Entity Types"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Entity Types",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+             });
+
+            var table20 = $('#catalogsdatatables').DataTable({
+                "bProcessing": true,
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [-1] }
+                ],
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,
+                searching: true,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 50, 100, 200, -1],
+                    [10, 50, 100, 200, "All"]
+                ],
+                dom: 'Bfltip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Catalogs"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0, 0, {
+                                text: "Catalogs"
+                            });
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        },
+                        title: "Catalogs",
+                        filename: filename,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="~/assets/img/background/logo.png" style="position:absolute; width: "50"; margin-left:40%;margin-top:20%;"/>'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+             });
+            
+            //================================================
+
+            $().ready(function () {
+                $("#datepicker").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    showStatus: true,
+                    showWeeks: true,
+                    currentText: 'Now',
+                    autoSize: true,
+                    gotoCurrent: true,
+                    showAnim: 'blind',
+                    highlightWeek: true
+                });
+                //$('#loanAppllicationForm').validate();
+            });
+        });
+
+    </script>
+
+    @*<script type="text/javascript">
+            $().ready(function () {
+                $('#loanAppllicationForm').validate();
+            });
+        </script>*@
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Retailr3.Models.Vat.ListVatViewModel>
+
+@{
+    ViewData["Title"] = $"Vats for {ViewBag.VatCategory.Name}";
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="toolbar">
+                        @*more buttons to go here*@
+                        @*@if (User.Claims.First(claim => claim.Type == "role").Value.ToLower().Equals("merchant"))
+                        {*@
+                        <p>
+                            <a class="btn btn-success btn-sm" asp-action="Index">Back</a>
+                            @Html.ActionLink("Add Vat", "CreateVat", new { VatCategoryId = ViewBag.VatCategory.Id, VatCategoryName = ViewBag.VatCategory.Name }, new { title = "Add Vat", @class = "text-success btn btn-md btn-success" })
+                        </p>
+                        @*}*@
+
+                    </div>
+                    <div class="fresh-datatables">
+                        <table id="vatsdatatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.VatCategoryName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Rate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EffectiveDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateCreated)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateLastUpdated)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Count() > 0)
+                                {
+
+                                    @foreach (var item in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VatCategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EffectiveDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("", "EditSubBrand", new { id = item.Id }, new { title = "Edit Sub Brand", @class = "i ti-pencil text-success" }) |
+                                        @Html.ActionLink("", "SubBrandDetails", new { id = item.Id }, new { title = "Sub Brand Details", @class = "i ti-eye text-info" }) |
+                                        @Html.ActionLink("", "DeleteSubBrand", new { id = item.Id }, new { title = "Delete Sub Brand", @class = "i ti-close text-danger" })
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                                else
+                                {
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

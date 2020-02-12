@@ -1,0 +1,101 @@
+﻿@model Retailr3.Models.EntityTypeViewModels.EntityTypeDetailsViewModel
+
+@{
+    ViewData["Title"] = "Delete Entity Type";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                @*<h4 class="card-title">Edit Profile</h4>*@
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Id)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.Id)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Code)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.Code)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Name)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.Name)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.Description)</label>
+                            <textarea readonly asp-for="Description" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.DateCreated)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.DateCreated)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.DateLastUpdated)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.DateLastUpdated)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <form id="entityTypeDeleteForm" asp-action="Delete">
+            <a class="btn btn-success btn-sm" asp-action="Index">Back To Tiers</a>|
+            <input id="entityTypeDelete" type="submit" value="Delete" class="btn btn-danger btn-sm" />
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $("document").ready(function () {
+
+
+            $('#entityTypeDelete').on('click', function (e) {
+                e.preventDefault(); // prevent form submit
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes!',
+                    confirmButton: 'confirm-button-class',
+                    cancelButtonText: 'No!',
+                    cancelButton: 'cancel-button-class',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $('#entityTypeDeleteForm').submit();
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire(
+                            'Cancelled',
+                            'Your resource is safe',
+                            'info'
+                        )
+                    }
+                })
+            })
+        });
+
+    </script>
+}

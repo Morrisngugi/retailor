@@ -1,0 +1,514 @@
+﻿@model Retailr3.Models.Dashboard.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard Summary";
+}
+
+<div class="row">
+    
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Transactions Analytics</h4>
+                </div>
+                <div class="card-content">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a id="todayh" href="#today" data-toggle="tab">Today</a></li>
+                                <li><a id="weekh" href="#week" data-toggle="tab">Last 7 Days</a></li>
+                                <li><a id="monthh" href="#month" data-toggle="tab">Last 30 Days</a></li>
+                                <li><a id="pending" href="#pending" data-toggle="tab">Pending Approval</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="my-tab-content" class="tab-content text-center">
+                        <div class="tab-pane active" id="today">
+                            <div class="card ">
+                                <div class="card-header">
+                                </div>
+                                <div class="card-content">
+                                    <div id="containertoday" style="height: auto; width: 100%;" class="ct-chart"></div>
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="week">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+
+                                <div class="content">
+                                    <div id="containerweek" style="height: auto; width: 100%;" class="ct-chart"></div>
+                                </div>
+
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="month">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+
+                                <div class="content">
+                                    <div id="containermonth" style="height: auto; width: 100%;" class="ct-chart"></div>
+                                </div>
+
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="pending">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+
+                                <div class="content">
+                                    <div id="containerpending" style="height: auto; width: 100%;" class="ct-chart"></div>
+                                </div>
+
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="~/js/umd/canvasjs.min.js"></script>
+<script src="~/js/umd/highcharts.js"></script>
+<script src="~/js/umd/exporting.js"></script>
+<script src="~/js/umd/export-data.js"></script>
+
+<script type="text/javascript">
+
+    $("document").ready(function () {
+        var today = Highcharts.chart('containertoday', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Transaction Report'
+            },
+            subtitle: {
+                text: 'Today'
+            },
+            xAxis: {
+                categories: ['Transactions'],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Count'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+
+            series: [{
+                    name: 'Purchases',
+                    data: [@Model.SmsSent]
+                }, {
+                    name: 'Sales',
+                    data: [@Model.SmsPending]
+                }, {
+                    name: 'Orders Pending Approval',
+                    data: [@Model.SmsDelivered]
+                }, {
+                    name: 'Orders Pending Delivery',
+                    data: [@Model.SmsFailed]
+                }, {
+                    name: 'Cancelled',
+                    data: [@Model.SmsReceived]
+                }]
+        });
+
+        $('#todayh').on('click', function (e) {
+
+            e.preventDefault();
+            var SmsSent = 0;
+            var SmsPending = 0;
+            var SmsDelivered = 0;
+            var SmsFailed = 0;
+            var SmsReceived = 0;
+
+                var url = '/Home/LastOneDaySms';
+                var method = 'GET';
+
+
+                Swal.fire({
+                    title: 'Processing',
+                    html: 'Please Wait',
+                    onBeforeOpen: function  onBeforeOpen() {
+                        Swal.showLoading()
+                    }
+                });
+            return $.ajax({
+                url: url,
+                //data: JSON.stringify(myData),
+                type: method,
+                traditional: true,
+                contentType: 'application/json',
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                            
+                    SmsSent = parseInt(data.smsSent);
+                    SmsPending = parseInt(data.smsPending);
+                    SmsDelivered = parseInt(data.smsDelivered);
+                    SmsFailed = parseInt(data.smsFailed);
+                    SmsReceived = parseInt(data.smsReceived);
+
+                    swal.close();
+                        },
+                        failure: function (error) {
+                            
+                            swal.close();
+                            Swal.fire({
+                                title: 'Sms Report Processing',
+                                html: 'Error Occured while processing sms report',
+                                type: 'error',
+                                timer: 5000
+                            });
+                        }
+
+                });
+
+
+            var today = Highcharts.chart('containertoday', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Transaction Report'
+                },
+                subtitle: {
+                    text: 'Today'
+                },
+                xAxis: {
+                    categories: ['Transactions'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Purchases',
+                    data: [@Model.SmsSent]
+                }, {
+                    name: 'Sales',
+                    data: [@Model.SmsPending]
+                }, {
+                    name: 'Orders Pending Approval',
+                    data: [@Model.SmsDelivered]
+                }, {
+                    name: 'Orders Pending Delivery',
+                    data: [@Model.SmsFailed]
+                }, {
+                    name: 'Cancelled',
+                    data: [@Model.SmsReceived]
+                }]
+            });
+        });
+
+
+        $('#weekh').on('click', function (e) {
+             e.preventDefault();
+            var SmsSent1 = 0;
+            var SmsPending1 = 0;
+            var SmsDelivered1 = 0;
+            var SmsFailed1 = 0;
+            var SmsReceived1 = 0;
+
+            var url = '/Home/LastSevenDaySms';
+            var method = 'GET';
+
+            Swal.fire({
+                title: 'Processing',
+                html: 'Please Wait',
+                onBeforeOpen: function onBeforeOpen() {
+                    Swal.showLoading()
+                }
+            });
+
+            return $.ajax({
+                url: url,
+                type: method,
+                traditional: true,
+                contentType: 'application/json',
+                cache: false,
+                success: function (data) {
+
+                    SmsSent1 = parseInt(data.smsSent);
+                    SmsPending1 = parseInt(data.smsPending);
+                    SmsDelivered1 = parseInt(data.smsDelivered);
+                    SmsFailed1 = parseInt(data.smsFailed);
+                    SmsReceived1 = parseInt(data.smsReceived);
+
+                    swal.close();
+                    var week = Highcharts.chart('containerweek', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Transaction Report'
+                },
+                subtitle: {
+                    text: 'Last 7 Days'
+                },
+                xAxis: {
+                    categories: ['Transactions'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Purchases',
+                    data: [@Model.SmsSent]
+                }, {
+                    name: 'Sales',
+                    data: [@Model.SmsPending]
+                }, {
+                    name: 'Orders Pending Approval',
+                    data: [@Model.SmsDelivered]
+                }, {
+                    name: 'Orders Pending Delivery',
+                    data: [@Model.SmsFailed]
+                }, {
+                    name: 'Cancelled',
+                    data: [@Model.SmsReceived]
+                }]
+            });
+
+                },
+
+                failure: function (error) {                          
+                    swal.close();
+                    Swal.fire({
+                        title: 'Sms Report Processing',
+                        html: 'Error Occured while processing sms report',
+                        type: 'error',
+                        timer: 5000
+                    });
+                }
+            });
+
+
+            
+        });
+
+
+        $('#monthh').on('click', function (e) {
+
+             e.preventDefault();
+            var SmsSent2 = 0;
+            var SmsPending2 = 0;
+            var SmsDelivered2 = 0;
+            var SmsFailed2 = 0;
+            var SmsReceived2 = 0;
+
+            var url = '/Home/LastThirtyDaySms';
+            var method = 'GET';
+
+            Swal.fire({
+                title: 'Processing',
+                html: 'Please Wait',
+                onBeforeOpen: function onBeforeOpen() {
+                    Swal.showLoading()
+                }
+            });
+
+            return $.ajax({
+                url: url,
+                type: method,
+                traditional: true,
+                contentType: 'application/json',
+                cache: false,
+                success: function (data) {
+                    SmsSent2 = parseInt(data.smsSent);
+                    SmsPending2 = parseInt(data.smsPending);
+                    SmsDelivered2 = parseInt(data.smsDelivered);
+                    SmsFailed2 = parseInt(data.smsFailed);
+                    SmsReceived2 = parseInt(data.smsReceived);
+
+                    console.log(SmsSent2);
+
+                    swal.close();
+                    var month = Highcharts.chart('containermonth', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Transaction Report'
+                },
+                subtitle: {
+                    text: 'Last 30 Days'
+                },
+                xAxis: {
+                    categories: ['Transactions'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Purchases',
+                    data: [@Model.SmsSent]
+                }, {
+                    name: 'Sales',
+                    data: [@Model.SmsPending]
+                }, {
+                    name: 'Orders Pending Approval',
+                    data: [@Model.SmsDelivered]
+                }, {
+                    name: 'Orders Pending Delivery',
+                    data: [@Model.SmsFailed]
+                }, {
+                    name: 'Cancelled',
+                    data: [@Model.SmsReceived]
+                }]
+            });
+                },
+
+                failure: function (error) {
+                    swal.close();
+                    Swal.fire({
+                        title: 'Sms Report Processing',
+                        html: 'Error Occured while processing sms report',
+                        type: 'error',
+                        timer: 5000
+                    });
+                }
+            });
+
+
+
+            
+        });
+
+        $('#pending').on('click', function (e) {
+            var month = Highcharts.chart('containerpending', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Transaction Report'
+                },
+                subtitle: {
+                    text: 'Pending Approval'
+                },
+                xAxis: {
+                    categories: ['Transactions'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Pending',
+                    data: [@Model.SmsReceived]
+                }]
+            });
+        });
+
+    });
+
+</script>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Retailr3.Models.LogModels.ListLogsViewModel>
+
+@{
+    ViewData["Title"] = "List of Logs";
+    Layout = "_Layout";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="toolbar">
+                 
+                </div>
+                <div class="fresh-datatables">
+                    <table id="logsdatatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Level)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Message)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MessageTemplate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TimeStamp)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LogEvent)
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.Count() > 0)
+                            {
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Level)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Message)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MessageTemplate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TimeStamp)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LogEvent)
+                                        </td>
+                                        <td class="">
+                                            @Html.ActionLink("", "Details", new { id = item.Id }, new { title = "Details", @class = "i ti-eye text-info" })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

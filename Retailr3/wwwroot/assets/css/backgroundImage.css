@@ -1,0 +1,17 @@
+﻿.photo {
+    background-image: url('https://localhost:44323/assets/img/stanbic.jpg');
+    background-size: 190px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-clip: border-box;
+   
+  
+    display: block;
+    width: 190px;
+    height: 190px;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}

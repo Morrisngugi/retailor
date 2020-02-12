@@ -1,0 +1,49 @@
+﻿<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar bar1"></span>
+                <span class="icon-bar bar2"></span>
+                <span class="icon-bar bar3"></span>
+            </button>
+            <a class="navbar-brand" href="#Dashboard">
+                @ViewData["Title"]
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <form asp-controller="Account"
+                  asp-action="LogoutAsync"
+                  asp-route-returnUrl="@Url.Action("Index","Home",new {area = ""})"
+                  method="post"
+                  id="logoutForm"
+                  class="navbar-right">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+
+                        <a href="#"
+                           title="Manage"
+                           style="color:black;">
+                            Hello
+                            @User.Claims.First(claim => claim.Type == "preferred_username").Value
+                        </a>
+
+                    </li>
+                    <li>
+
+                        <button type="submit"
+                                class="btn btn-link navbar-btn"
+                                style="color:black;">
+                            <i class="fa fa-power-off"></i><span class="text">Logout</span>
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </form>
+        </div>
+    </div>
+</nav>

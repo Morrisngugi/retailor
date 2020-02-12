@@ -1,0 +1,101 @@
+﻿@model Retailr3.Models.UnitOfMeasure.AddUOMViewModel
+
+@{
+    ViewData["Title"] = $"New Unit Of Measure for {ViewBag.UomTypeName}";
+}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-content">
+                    <form id="loanAppllicationForm" asp-action="CreateUOM" method="POST">
+                        @Html.ValidationSummary(true)
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="UomTypeId" />
+                        </div>
+
+                        <div class="row col-md-6 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Name" class="control-label"></label><span style="color: red"> *</span>
+                                        <input id="name" required asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label"></label>
+                                        <input id="description" asp-for="Description" class="form-control" />
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Grammage" class="control-label"></label>
+                                        <input required id="grammage" asp-for="Grammage" class="form-control" />
+                                        <span asp-validation-for="Grammage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PackSize" class="control-label"></label>
+                                        <input required id="packSize" asp-for="PackSize" class="form-control" />
+                                        <span asp-validation-for="PackSize" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PalletSize" class="control-label"></label>
+                                        <input required id="palletSize" asp-for="PalletSize" class="form-control" />
+                                        <span asp-validation-for="PalletSize" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-center submit-button">
+                                        <button id="submit_btn" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            @Html.ActionLink("Back to Unit Of Measures", "UnitOfMeasures", new { id = Model.UomTypeId }, new { title = "Unit Of Measure", @class = "btn btn-md btn-info" })
+        </div>
+    </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

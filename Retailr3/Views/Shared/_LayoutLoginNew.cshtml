@@ -1,0 +1,81 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailr | Login</title>
+    <environment names="Development">
+        <link href="~/identityassets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/identityassets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/identityassets/css/animate.css" rel="stylesheet" />
+        <link href="~/identityassets/css/style.css" rel="stylesheet" />
+        <link href="~/assets/css/login.css" rel="stylesheet" />
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/identityassets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/identityassets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/identityassets/css/animate.css" rel="stylesheet" />
+        <link href="~/identityassets/css/style.css" rel="stylesheet" />
+        <link href="~/assets/css/login.css" rel="stylesheet" />
+    </environment>
+</head>
+
+<body class="login-side-main">
+    <div class="container">
+        <div class="row">
+            <div>
+                <br />
+                <br />
+            </div>
+            <div class="login-logo">
+                <img class="pull-left login-logo-img" src="~/assets/img/background/hd-vc-logo.png" @*src="~/assets/img/Logos/group.png"*@ />
+            </div>
+        </div>
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="col-md-8">
+                    <div class="login-form">
+                        <span class="login-name login-logo-text">Retailr</span>
+                        <h3 class="tagline-text">
+                            A Reliable platform that streamlines retail merchant operations in the supplychain ecosystem.
+                        </h3>
+                        <br>
+                        @*<a href="https://www.stanbicbank.co.ke/kenya/About-Us/Footer/Privacy-and-security-statement" class="terms-and-condition-link" target="_blank"><p><u>Please read our privacy statement</u></p></a>
+                        <a href="https://www.stanbicbank.co.ke/kenya/About-Us/Footer/Conditions-of-Access" class="terms-and-condition-link" target="_blank"><p><u>Please read our terms and conditions</u></p></a>*@
+                    </div>
+                </div>
+                <div class="col-md-4 login-box">
+                    
+                    <div class="login-form">
+                        <h3 class="login-button-text">LOGIN</h3>
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Mainly scripts -->
+    <environment names="Development">
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script src="~/identityassets/js/bootstrap.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script src="~/identityassets/js/bootstrap.js"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

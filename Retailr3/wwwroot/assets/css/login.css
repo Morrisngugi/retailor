@@ -1,0 +1,75 @@
+﻿.login-side-main {
+    height: 100%;
+    width: 100%;
+    /*background-image: url(../img/background/background-image.png);*/
+    /*background-image: url(../img/background/CFC_Stanbic_bank.png);*/
+    /*background-size: initial;*/
+    /*background-size: 100% 100%;*/
+    background-repeat: no-repeat;
+    background-size: auto;
+    /*opacity: 0.5;*/
+}
+
+.login-logo {
+    /*background-color: #1152c6;*/
+    /*opacity: 0.5;*/
+    padding: 10px;
+    margin: 20px;
+}
+
+.login-logo-img {
+    /*width: auto;*/
+    width: 20%;
+    color: #39af78;
+}
+
+.login-form {
+    padding: 20px;
+    margin: 20px;
+}
+
+.login-name {
+    color: #e6e6e6;
+    font-size: 80px;
+    font-weight: 800;
+    letter-spacing: -10px;
+    margin-bottom: 0;
+}
+
+.login-logo-text {
+    color: #96a3a8;
+}
+.tagline-text {
+    color: #1b1718;
+}
+.terms-and-condition-link {
+    color: white;
+    font-size: 16px;
+}
+
+.login-control {
+    background-color: inherit;
+    background-image: none;
+    border: 2px solid #39af78;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+.login-box, login-button-text {
+    border-left: 2px solid #1152c6;
+}
+
+.login-button-text{
+    color: blue;
+}
+
+.login-button {
+    background-color: #01a0e2;
+    border-color: #1152c6;
+    color: #FFFFFF;
+}
+

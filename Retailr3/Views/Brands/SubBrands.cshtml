@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Retailr3.Models.SubBrand.ListSubBrandViewModel>
+
+@{
+    ViewData["Title"] = $"Sub Brands for {ViewBag.Brand.Name}";
+}
+
+ <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="toolbar">
+                        @*more buttons to go here*@
+                        @*@if (User.Claims.First(claim => claim.Type == "role").Value.ToLower().Equals("merchant"))
+                        {*@
+                        <p>
+                            <a class="btn btn-success btn-sm" asp-action="Index">Back</a>
+                            @Html.ActionLink("Add Sub Brand", "CreateSubBrand", new { BrandId = ViewBag.Brand.Id, BrandName = ViewBag.Brand.Name }, new { title = "Add Sub Brand", @class = "text-success btn btn-md btn-success" })
+                        </p>
+                        @*}*@
+
+                    </div>
+                    <div class="fresh-datatables">
+                        <table id="sBrandsdatatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.BrandName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateCreated)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateLastUpdated)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.Count() > 0)
+                                {
+
+                                    @foreach (var item in Model)
+                                    {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BrandName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("", "EditSubBrand", new { id = item.Id }, new { title = "Edit Sub Brand", @class = "i ti-pencil text-success" }) |
+                                        @Html.ActionLink("", "SubBrandDetails", new { id = item.Id }, new { title = "Sub Brand Details", @class = "i ti-eye text-info" }) |
+                                        @Html.ActionLink("", "DeleteSubBrand", new { id = item.Id }, new { title = "Delete Sub Brand", @class = "i ti-close text-danger" })
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                                else
+                                {
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

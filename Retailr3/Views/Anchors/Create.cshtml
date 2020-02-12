@@ -1,0 +1,348 @@
+﻿@model Retailr3.Models.AnchorViewModels.AddAnchorViewModel
+
+@{
+    ViewData["Title"] = "New Anchor";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-content">
+                <form id="loanAppllicationForm" asp-action="Create" method="POST">
+                    @Html.ValidationSummary(true)
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <fieldset>
+                        <legend>Basic Info:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label><span style="color: red"> *</span>
+                                    <input id="name" required asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea id="description" asp-for="Description" class="form-control">
+                                    </textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RegistrationNumber" class="control-label"></label>
+                                    <input asp-for="RegistrationNumber" class="form-control" />
+                                    <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="LicenceNumber" class="control-label"></label>
+                                    <input asp-for="LicenceNumber" class="form-control" />
+                                    <span asp-validation-for="LicenceNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DateOfRegistration" class="control-label"></label>
+                                    <input asp-for="DateOfRegistration" class="form-control" id="datepicker1"/>
+                                    @*@Html.TextBoxFor(m => m.DateOfRegistration, "{0:MM/dd/yyyy}", new { @id = "datepicker", @class = "form-control" })*@
+                                    <span asp-validation-for="DateOfRegistration" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Address:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Country</label>
+                                    <select onchange="getRegions()" id="countryId" required @*asp-for="TierId"*@ class="form-control" asp-items="@(new SelectList(ViewBag.Countries, "Id", "Name"))"></select>
+                                    @*<span asp-validation-for="TierId" class="text-danger"></span>*@
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RegionId" class="control-label"></label>
+                                    @*<select id="regionId" asp-for="RegionId" class="form-control"></select>*@
+
+                                    <select asp-for="RegionId" id="regionId" name="RegionId" class="form-control" required>
+                                    </select>
+                                    <span asp-validation-for="RegionId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City" class="control-label"></label>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Street" class="control-label"></label>
+                                    <input asp-for="Street" class="form-control" />
+                                    <span asp-validation-for="Street" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="AddressPhone" class="control-label"></label>
+                                    <input asp-for="AddressPhone" class="form-control" />
+                                    <span asp-validation-for="AddressPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="AddressEmail" class="control-label"></label>
+                                    <input asp-for="AddressEmail" class="form-control" />
+                                    <span asp-validation-for="AddressEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Contact Person:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label"></label><span style="color: red"> *</span>
+                                    <input id="firstname" required asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ContactPhone" class="control-label"></label>
+                                    <input asp-for="ContactPhone" class="form-control" />
+                                    <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ContactEmail" class="control-label"></label>
+                                    <input asp-for="ContactEmail" class="form-control" />
+                                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Setting:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="SettingName" class="control-label"></label>
+                                    <input asp-for="SettingName" class="form-control" />
+                                    <span asp-validation-for="SettingName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="SettingDescription" class="control-label"></label>
+                                    <input asp-for="SettingDescription" class="form-control" />
+                                    <span asp-validation-for="SettingDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="SaleOrderAutoApproval" class="control-label"></label>
+                                    <input type="checkbox" asp-for="SaleOrderAutoApproval" />
+                                    <span asp-validation-for="SaleOrderAutoApproval" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label asp-for="PurchaseOrderAutoApproval" class="control-label"></label>
+                                        <input type="checkbox" asp-for="PurchaseOrderAutoApproval" />
+                                        <span asp-validation-for="PurchaseOrderAutoApproval" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Tier:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @*<div class="form-group">
+                                        <label asp-for="TierId" class="control-label"></label>
+                                        <input asp-for="TierId" class="form-control" />
+                                        <span asp-validation-for="TierId" class="text-danger"></span>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label asp-for="TierId" class="control-label"></label><span style="color: red"> *</span>
+                                    <select required asp-for="TierId" class="form-control" asp-items="@(new SelectList(ViewBag.Tiers, "Id", "Name"))"></select>
+                                    <span asp-validation-for="TierId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Entity Type:</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="EntityTypeId" class="control-label"></label>
+                                    @*<input asp-for="EntityTypeId" class="form-control" />*@
+                                    <select required asp-for="EntityTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.EntityTypes, "Id", "Name"))"></select>
+                                    <span asp-validation-for="EntityTypeId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center submit-button">
+                                <button id="submit_btn" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <a class="btn btn-info btn-sm" asp-action="Index">Back</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        //$("document").ready(function () {
+
+            
+            //$('#countryId').on('change', function (e) {
+            //    e.preventDefault();
+
+            function getRegions() {
+                var url = '/Countries/GetRegions';
+                var method = 'POST';
+
+                var countryId = $('#countryId').val();
+
+                var region = $('#regionId');
+
+                var myData = { "CountryId": countryId }
+                console.log(myData);
+                Swal.fire({
+                    title: 'Fetching Regions',
+                    html: 'Please Wait',
+                    onBeforeOpen: function onBeforeOpen() {
+                        Swal.showLoading()
+                    }
+                });
+                return $.ajax({
+                    url: '/Countries/GetRegions/',
+                    data: JSON.stringify(myData),
+                    type: 'POST',
+                    traditional: true,
+                    contentType: 'application/json',
+                    cache: false,
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                        if (data == "") {
+                            region.html('');
+                            region.append(`<option value=""> No Regions available</option>`);
+                            swal.close();
+                            Swal.fire({
+                                type: 'info',
+                                title: 'Regions',
+                                html: 'No Region was found',
+                                timer: 10000
+                            });
+                        } else {
+                            swal.close();
+                            region.html('');
+                            $.each(data, function (index, val) {
+                                region.append(`<option id='${val.id}' value='${val.id}' + >${val.name}</option>`);
+                            })
+                        }
+                    },
+                    failure: function (error) {
+                        region.html('');
+                        region.append(`<option> No Regions available</option>`);
+                        swal.close();
+                        Swal.fire({
+                                type: 'info',
+                                title: 'Regions',
+                                html: 'An Error Occured while fetching Regions',
+                                timer: 10000
+                            });
+                    }
+
+                });
+
+            }
+
+
+
+
+
+    </script>
+}
+
+
+

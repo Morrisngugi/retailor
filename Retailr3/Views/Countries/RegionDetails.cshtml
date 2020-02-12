@@ -1,0 +1,68 @@
+﻿@model Retailr3.Models.RegionModels.RegionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Region Details";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                @*<h4 class="card-title">Edit Profile</h4>*@
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.CountryName)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.CountryName)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.RegionCode)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.RegionCode)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.RegionName)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.RegionName)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.RegionDescription)</label>
+                            <textarea readonly asp-for="RegionDescription" class="form-control"></textarea>
+                            @*<label class="form-control border-input">@Html.DisplayFor(model => model.RegionDescription)</label>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.DateCreated)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.DateCreated)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>@Html.DisplayNameFor(model => model.DateLastUpdated)</label>
+                            <label class="form-control border-input">@Html.DisplayFor(model => model.DateLastUpdated)</label>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        @Html.ActionLink("Back", "Regions", new { id = Model.CountryId }, new { title = "Regions", @class = "btn btn-md btn-info" }) |  @Html.ActionLink("Edit Region", "EditRegion", new { id = Model.RegionId }, new { title = "Edit Region", @class = "btn btn-info btn-sm" })
+
+
+    </div>
+</div>
+
